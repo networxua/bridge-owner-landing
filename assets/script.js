@@ -50,15 +50,4 @@
       if (panel) panel.hidden = open;
     });
   });
-
-  var form = document.querySelector(".preview-form");
-  if (!form) return;
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    var status = document.getElementById("form-status");
-    if (!status) return;
-    status.hidden = false;
-    status.textContent = "Нічого не надіслано. Форма-превʼю для презентації. Підключення — після погодження.";
-  });
 })();

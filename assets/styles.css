@@ -203,6 +203,13 @@ h2,
   border-bottom-color: var(--ink);
 }
 
+.nav-cta {
+  margin-left: 0.35rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
 .hero {
   display: grid;
 }
@@ -561,12 +568,6 @@ button.orbit {
   gap: 2rem;
 }
 
-.form-note {
-  color: var(--muted);
-  font-size: 0.92rem;
-  margin-bottom: 0.4rem;
-}
-
 form {
   display: grid;
   gap: 0.95rem;
@@ -635,6 +636,7 @@ textarea:focus {
 .submit {
   justify-self: start;
   margin-top: 0.4rem;
+  display: inline-block;
   background: var(--ink);
   color: var(--paper);
   border: 0;
@@ -642,6 +644,7 @@ textarea:focus {
   font-weight: 580;
   padding: 0.92rem 1.2rem;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .submit:hover {
