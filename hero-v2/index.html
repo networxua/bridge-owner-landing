@@ -39,27 +39,30 @@
         <div class="hero-copy">
           <p class="kicker">BRIDGE · КИЇВ · ДЛЯ ВЛАСНИКІВ</p>
           <h1 id="hero-title">
-            <span class="line">Не просто</span>
-            <span class="line">оцінка.</span>
-            <span class="line">План <br class="only-narrow">продажу.</span>
+            <span class="line wide">Не просто оцінка.</span>
+            <span class="line narrow">Не просто</span>
+            <span class="line narrow">оцінка.</span>
+            <span class="line">План продажу.</span>
           </h1>
-          <p class="lede">Безкоштовно оцінимо вашу нерухомість і письмово розпишемо кроки: підготовка, реклама, покази та робота з покупцями.</p>
+          <p class="lede">Оцінимо вашу нерухомість і письмово розпишемо кроки: підготовка, реклама, покази та робота з покупцями.</p>
           <div class="actions">
-            <details class="contact-reveal">
-              <summary class="orbit">
+            <div class="offer-block">
+              <button type="button" class="orbit" id="open-contact" aria-expanded="false" aria-controls="contact-step">
                 <span class="orbit-spin" aria-hidden="true"></span>
-                <span class="orbit-label">Обговорити свою квартиру</span>
-              </summary>
-              <div class="contact-panel">
-                <p class="contact-title">Почнемо з вашої квартири</p>
-                <p>Розкажіть про неї агенту — ми обговоримо оцінку і письмовий план продажу.</p>
-                <div class="choices">
-                  <a href="tel:+380635933019">Телефон · +38 (063) 593 30 19</a>
-                  <a href="https://www.instagram.com/bridge__realty/" target="_blank" rel="noopener">Instagram · @bridge__realty<span class="sr">, відкриється в новій вкладці</span></a>
-                </div>
-              </div>
-            </details>
+                <span class="orbit-label">Отримати безкоштовний план продажу</span>
+              </button>
+              <p class="offer-note">Оцінка і план — безкоштовно</p>
+            </div>
+            <button type="button" class="text-open" data-open-contact>Обговорити квартиру</button>
             <a class="down" href="#plan">Що входить у план ↓</a>
+          </div>
+          <div id="contact-step" class="contact-panel" hidden>
+            <p class="contact-title">Почнемо з вашої квартири</p>
+            <p>Розкажіть про неї агенту — ми обговоримо оцінку і план продажу.</p>
+            <div class="choices">
+              <a href="tel:+380635933019">Зателефонувати · +38 (063) 593 30 19</a>
+              <a href="https://www.instagram.com/bridge__realty/" target="_blank" rel="noopener">Написати в Instagram · @bridge__realty<span class="sr">, відкриється в новій вкладці</span></a>
+            </div>
           </div>
           <p class="quiet">
             <a href="tel:+380635933019">+38 (063) 593 30 19</a>
@@ -67,6 +70,7 @@
           </p>
         </div>
 
+        <p class="art-note">Художній концепт · не об’єкт Bridge</p>
         <a class="nudge" href="#plan">
           <span class="nudge-line" aria-hidden="true"></span>
           далі
@@ -92,6 +96,7 @@
       </div>
         <nav aria-label="Меню власника">
         <a href="#plan">Для власників</a>
+        <button type="button" data-open-contact>Отримати безкоштовний план продажу</button>
         <a href="tel:+380635933019">Зателефонувати</a>
         <a class="fine" href="tel:+380635933019">+38 (063) 593 30 19</a>
         <a class="fine" href="https://www.instagram.com/bridge__realty/" rel="noopener noreferrer">Написати @bridge__realty</a>
@@ -136,27 +141,49 @@
           if (event.target.closest("a")) closeMenu();
         });
 
-        var reveal = document.querySelector(".contact-reveal");
-        var summary = reveal ? reveal.querySelector("summary") : null;
+        var panel = document.getElementById("contact-step");
+        var opener = document.getElementById("open-contact");
 
-        function closeReveal() {
-          if (!reveal || !reveal.open) return;
-          reveal.open = false;
-          if (summary) summary.focus();
-        }
-
-        if (reveal) {
-          reveal.addEventListener("toggle", function () {
-            if (!reveal.open) return;
-            var panel = reveal.querySelector(".contact-panel");
-            if (panel) panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+        function setOpen(next) {
+          if (!panel || !opener) return;
+          panel.hidden = !next;
+          opener.setAttribute("aria-expanded", next ? "true" : "false");
+          document.querySelectorAll("[data-open-contact]").forEach(function (el) {
+            el.setAttribute("aria-expanded", next ? "true" : "false");
           });
         }
+
+        function openContact(focusInside) {
+          setOpen(true);
+          var target = focusInside ? panel.querySelector("a") : opener;
+          if (panel) panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+          if (target) target.focus();
+        }
+
+        function closeContact() {
+          if (!panel || panel.hidden) return;
+          setOpen(false);
+          if (opener) opener.focus();
+        }
+
+        if (opener) {
+          opener.addEventListener("click", function () {
+            if (panel.hidden) openContact(false);
+            else closeContact();
+          });
+        }
+
+        document.querySelectorAll("[data-open-contact]").forEach(function (el) {
+          el.addEventListener("click", function () {
+            if (!drawer.hidden) closeMenu();
+            openContact(true);
+          });
+        });
 
         document.addEventListener("keydown", function (event) {
           if (event.key === "Escape") {
             if (!drawer.hidden) closeMenu();
-            else closeReveal();
+            else closeContact();
             return;
           }
           if (drawer.hidden || event.key !== "Tab") return;

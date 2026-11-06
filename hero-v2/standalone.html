@@ -249,8 +249,8 @@ p {
 .hero-copy {
   position: relative;
   z-index: 2;
-  width: min(44rem, calc(100% - 6.5rem));
-  padding: 0 0 2.75rem 3.5rem;
+  width: min(1180px, calc(100% - 4.5rem));
+  padding: 0 0 1.6rem 3.5rem;
 }
 
 .kicker {
@@ -263,15 +263,31 @@ p {
 }
 
 .hero h1 {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: max-content;
+  max-width: 100%;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
-  font-size: 100px;
+  font-size: clamp(86px, 10.8333vw, 168px);
   line-height: 0.91;
   letter-spacing: -0.03em;
   color: var(--bone);
+}
+
+.hero h1::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.08em;
+  right: 0.2em;
+  top: 0.02em;
+  bottom: 0.04em;
+  background: linear-gradient(90deg, rgba(12, 15, 13, 0.34) 0%, rgba(12, 15, 13, 0.16) 68%, transparent 100%);
+  pointer-events: none;
 }
 
 .hero h1 .line {
@@ -279,9 +295,13 @@ p {
   white-space: nowrap;
 }
 
+.hero h1 .narrow {
+  display: none;
+}
+
 .lede {
-  max-width: 36rem;
-  margin-top: 1.35rem;
+  max-width: 38rem;
+  margin-top: 0.85rem;
   font-family: Manrope, sans-serif;
   font-size: 17px;
   font-weight: 400;
@@ -292,31 +312,26 @@ p {
 .actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 1rem 1.45rem;
-  margin-top: 1.7rem;
+  align-items: flex-end;
+  gap: 0.35rem 1.35rem;
+  margin-top: 1.05rem;
 }
 
-.contact-reveal {
+.offer-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
   max-width: 100%;
 }
 
-.contact-reveal summary {
-  list-style: none;
-  cursor: pointer;
-}
-
-.contact-reveal summary::-webkit-details-marker {
-  display: none;
-}
-
-.contact-reveal summary:focus-visible {
-  outline: none;
-}
-
-.contact-reveal summary:focus-visible .orbit-label {
-  outline: 2px solid var(--brass);
-  outline-offset: -5px;
+.offer-note {
+  margin: 0;
+  font-family: Manrope, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--bone-dim);
 }
 
 .contact-panel {
@@ -371,6 +386,15 @@ p {
   border: 0;
 }
 
+button.orbit {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 1px;
+}
+
 .orbit {
   position: relative;
   display: inline-grid;
@@ -411,12 +435,34 @@ p {
   text-align: center;
 }
 
-.orbit:hover .orbit-label {
+.orbit:hover .orbit-label,
+.orbit:focus-visible .orbit-label {
   background: #f3ecdf;
 }
 
+.orbit:focus-visible {
+  outline: none;
+}
+
+.orbit:focus-visible .orbit-label {
+  outline: 2px solid var(--brass);
+  outline-offset: -5px;
+}
+
+.text-open {
+  margin: 0 0 0.15rem;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--bone);
+  font: 500 16px/1.3 Manrope, sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+  cursor: pointer;
+}
+
 .down {
-  margin-top: 0.85rem;
+  margin-top: 0;
   font-family: Manrope, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -445,10 +491,24 @@ p {
   text-decoration: underline;
 }
 
+.art-note {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0.85rem;
+  z-index: 4;
+  margin: 0;
+  font-family: Manrope, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: rgba(230, 223, 207, 0.78);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
 .nudge {
   position: absolute;
-  right: 2rem;
-  bottom: 1.6rem;
+  right: 1.35rem;
+  bottom: 2.55rem;
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -561,15 +621,27 @@ p {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.85rem;
+  width: 100%;
 }
 
-.drawer nav a {
+.drawer nav a,
+.drawer nav button {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-decoration: none;
+  text-align: left;
+}
+
+.drawer nav button {
+  max-width: 100%;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
 }
 
 .drawer nav a.fine {
@@ -591,19 +663,9 @@ p {
   }
 }
 
-@media (max-width: 1100px) {
-  .hero h1 {
-    font-size: 96px;
-  }
-}
-
 @media (max-width: 720px) {
-  .only-narrow {
-    display: inline;
-  }
-
   .top {
-    padding: 0.7rem 1.15rem;
+    padding: 0.55rem 1.15rem;
   }
 
   .brand-role,
@@ -619,36 +681,86 @@ p {
   }
 
   .hero {
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 
   .hero-media img {
-    object-position: 36% 50%;
+    object-fit: cover;
+    object-position: 68% center;
   }
 
   .hero-copy {
-    width: auto;
-    max-width: 18.5rem;
-    padding: 5.4rem 1.15rem 2rem;
+    width: 100%;
+    max-width: none;
+    padding: 0 18px 2.15rem;
   }
 
   .kicker {
-    margin-bottom: 0.85rem;
-    letter-spacing: 0.12em;
+    margin-bottom: 0.35rem;
+    font-size: 11px;
+    letter-spacing: 0.08em;
   }
 
   .hero h1 {
-    font-size: 64px;
+    width: auto;
+    max-width: calc(100vw - 36px);
+    font-size: 54px;
+    line-height: 0.92;
+  }
+
+  .hero h1 .wide {
+    display: none;
+  }
+
+  .hero h1 .narrow {
+    display: block;
   }
 
   .lede {
-    margin-top: 1rem;
-    font-size: 16px;
+    max-width: none;
+    margin-top: 0.45rem;
+    font-size: 15px;
+    text-shadow: 0 1px 8px rgba(8, 10, 9, 0.9);
+  }
+
+  .kicker,
+  .offer-note,
+  .text-open,
+  .down,
+  .quiet a {
+    text-shadow: 0 1px 6px rgba(8, 10, 9, 0.85);
   }
 
   .actions {
+    flex-direction: column;
     align-items: flex-start;
-    margin-top: 1.25rem;
+    gap: 0.35rem;
+    margin-top: 0.55rem;
+  }
+
+  .orbit-label {
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .offer-note {
+    font-size: 12px;
+  }
+
+  .text-open,
+  .down {
+    font-size: 15px;
+  }
+
+  .quiet {
+    margin-top: 0.7rem;
+    font-size: 13px;
+  }
+
+  .art-note {
+    right: 10px;
+    bottom: 8px;
+    font-size: 11px;
   }
 
   .opening {
@@ -720,27 +832,30 @@ p {
         <div class="hero-copy">
           <p class="kicker">BRIDGE · КИЇВ · ДЛЯ ВЛАСНИКІВ</p>
           <h1 id="hero-title">
-            <span class="line">Не просто</span>
-            <span class="line">оцінка.</span>
-            <span class="line">План <br class="only-narrow">продажу.</span>
+            <span class="line wide">Не просто оцінка.</span>
+            <span class="line narrow">Не просто</span>
+            <span class="line narrow">оцінка.</span>
+            <span class="line">План продажу.</span>
           </h1>
-          <p class="lede">Безкоштовно оцінимо вашу нерухомість і письмово розпишемо кроки: підготовка, реклама, покази та робота з покупцями.</p>
+          <p class="lede">Оцінимо вашу нерухомість і письмово розпишемо кроки: підготовка, реклама, покази та робота з покупцями.</p>
           <div class="actions">
-            <details class="contact-reveal">
-              <summary class="orbit">
+            <div class="offer-block">
+              <button type="button" class="orbit" id="open-contact" aria-expanded="false" aria-controls="contact-step">
                 <span class="orbit-spin" aria-hidden="true"></span>
-                <span class="orbit-label">Обговорити свою квартиру</span>
-              </summary>
-              <div class="contact-panel">
-                <p class="contact-title">Почнемо з вашої квартири</p>
-                <p>Розкажіть про неї агенту — ми обговоримо оцінку і письмовий план продажу.</p>
-                <div class="choices">
-                  <a href="tel:+380635933019">Телефон · +38 (063) 593 30 19</a>
-                  <a href="https://www.instagram.com/bridge__realty/" target="_blank" rel="noopener">Instagram · @bridge__realty<span class="sr">, відкриється в новій вкладці</span></a>
-                </div>
-              </div>
-            </details>
+                <span class="orbit-label">Отримати безкоштовний план продажу</span>
+              </button>
+              <p class="offer-note">Оцінка і план — безкоштовно</p>
+            </div>
+            <button type="button" class="text-open" data-open-contact>Обговорити квартиру</button>
             <a class="down" href="#plan">Що входить у план ↓</a>
+          </div>
+          <div id="contact-step" class="contact-panel" hidden>
+            <p class="contact-title">Почнемо з вашої квартири</p>
+            <p>Розкажіть про неї агенту — ми обговоримо оцінку і план продажу.</p>
+            <div class="choices">
+              <a href="tel:+380635933019">Зателефонувати · +38 (063) 593 30 19</a>
+              <a href="https://www.instagram.com/bridge__realty/" target="_blank" rel="noopener">Написати в Instagram · @bridge__realty<span class="sr">, відкриється в новій вкладці</span></a>
+            </div>
           </div>
           <p class="quiet">
             <a href="tel:+380635933019">+38 (063) 593 30 19</a>
@@ -748,6 +863,7 @@ p {
           </p>
         </div>
 
+        <p class="art-note">Художній концепт · не об’єкт Bridge</p>
         <a class="nudge" href="#plan">
           <span class="nudge-line" aria-hidden="true"></span>
           далі
@@ -773,6 +889,7 @@ p {
       </div>
         <nav aria-label="Меню власника">
         <a href="#plan">Для власників</a>
+        <button type="button" data-open-contact>Отримати безкоштовний план продажу</button>
         <a href="tel:+380635933019">Зателефонувати</a>
         <a class="fine" href="tel:+380635933019">+38 (063) 593 30 19</a>
         <a class="fine" href="https://www.instagram.com/bridge__realty/" rel="noopener noreferrer">Написати @bridge__realty</a>
@@ -817,27 +934,49 @@ p {
           if (event.target.closest("a")) closeMenu();
         });
 
-        var reveal = document.querySelector(".contact-reveal");
-        var summary = reveal ? reveal.querySelector("summary") : null;
+        var panel = document.getElementById("contact-step");
+        var opener = document.getElementById("open-contact");
 
-        function closeReveal() {
-          if (!reveal || !reveal.open) return;
-          reveal.open = false;
-          if (summary) summary.focus();
-        }
-
-        if (reveal) {
-          reveal.addEventListener("toggle", function () {
-            if (!reveal.open) return;
-            var panel = reveal.querySelector(".contact-panel");
-            if (panel) panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+        function setOpen(next) {
+          if (!panel || !opener) return;
+          panel.hidden = !next;
+          opener.setAttribute("aria-expanded", next ? "true" : "false");
+          document.querySelectorAll("[data-open-contact]").forEach(function (el) {
+            el.setAttribute("aria-expanded", next ? "true" : "false");
           });
         }
+
+        function openContact(focusInside) {
+          setOpen(true);
+          var target = focusInside ? panel.querySelector("a") : opener;
+          if (panel) panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+          if (target) target.focus();
+        }
+
+        function closeContact() {
+          if (!panel || panel.hidden) return;
+          setOpen(false);
+          if (opener) opener.focus();
+        }
+
+        if (opener) {
+          opener.addEventListener("click", function () {
+            if (panel.hidden) openContact(false);
+            else closeContact();
+          });
+        }
+
+        document.querySelectorAll("[data-open-contact]").forEach(function (el) {
+          el.addEventListener("click", function () {
+            if (!drawer.hidden) closeMenu();
+            openContact(true);
+          });
+        });
 
         document.addEventListener("keydown", function (event) {
           if (event.key === "Escape") {
             if (!drawer.hidden) closeMenu();
-            else closeReveal();
+            else closeContact();
             return;
           }
           if (drawer.hidden || event.key !== "Tab") return;
