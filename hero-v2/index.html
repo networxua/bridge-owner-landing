@@ -29,7 +29,7 @@
           </a>
           <nav class="desk-nav" aria-label="Для власників">
             <a href="#plan">Для власників</a>
-            <a class="ghost" href="tel:+380635933019">Отримати оцінку</a>
+            <a class="ghost" href="tel:+380635933019">Зателефонувати</a>
           </nav>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="owner-menu">
             Меню
@@ -45,10 +45,20 @@
           </h1>
           <p class="lede">Безкоштовно оцінимо вашу нерухомість і письмово розпишемо кроки: підготовка, реклама, покази та робота з покупцями.</p>
           <div class="actions">
-            <a class="orbit" href="tel:+380635933019">
-              <span class="orbit-spin" aria-hidden="true"></span>
-              <span class="orbit-label">Отримати план продажу</span>
-            </a>
+            <details class="contact-reveal">
+              <summary class="orbit">
+                <span class="orbit-spin" aria-hidden="true"></span>
+                <span class="orbit-label">Обговорити свою квартиру</span>
+              </summary>
+              <div class="contact-panel">
+                <p class="contact-title">Почнемо з вашої квартири</p>
+                <p>Розкажіть про неї агенту — ми обговоримо оцінку і письмовий план продажу.</p>
+                <div class="choices">
+                  <a href="tel:+380635933019">Телефон · +38 (063) 593 30 19</a>
+                  <a href="https://www.instagram.com/bridge__realty/" target="_blank" rel="noopener">Instagram · @bridge__realty<span class="sr">, відкриється в новій вкладці</span></a>
+                </div>
+              </div>
+            </details>
             <a class="down" href="#plan">Що входить у план ↓</a>
           </div>
           <p class="quiet">
@@ -71,7 +81,7 @@
           <li><span>03</span>Покази</li>
           <li><span>04</span>Робота з покупцями</li>
         </ol>
-        <p class="concept">Концепт сторінки для Bridge · план продажу — майбутній документ аргентства</p>
+        <p class="concept">Концепт сторінки для Bridge · план продажу — майбутній документ агентства</p>
       </section>
     </main>
 
@@ -82,11 +92,11 @@
       </div>
         <nav aria-label="Меню власника">
         <a href="#plan">Для власників</a>
-        <a href="tel:+380635933019">Отримати оцінку</a>
+        <a href="tel:+380635933019">Зателефонувати</a>
         <a class="fine" href="tel:+380635933019">+38 (063) 593 30 19</a>
         <a class="fine" href="https://www.instagram.com/bridge__realty/" rel="noopener noreferrer">Написати @bridge__realty</a>
       </nav>
-      <p class="concept">Концепт сторінки для Bridge · план продажу — майбутній документ аргентства</p>
+      <p class="concept">Концепт сторінки для Bridge · план продажу — майбутній документ агентства</p>
     </div>
 
     <script>
@@ -126,9 +136,27 @@
           if (event.target.closest("a")) closeMenu();
         });
 
+        var reveal = document.querySelector(".contact-reveal");
+        var summary = reveal ? reveal.querySelector("summary") : null;
+
+        function closeReveal() {
+          if (!reveal || !reveal.open) return;
+          reveal.open = false;
+          if (summary) summary.focus();
+        }
+
+        if (reveal) {
+          reveal.addEventListener("toggle", function () {
+            if (!reveal.open) return;
+            var panel = reveal.querySelector(".contact-panel");
+            if (panel) panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+          });
+        }
+
         document.addEventListener("keydown", function (event) {
           if (event.key === "Escape") {
-            closeMenu();
+            if (!drawer.hidden) closeMenu();
+            else closeReveal();
             return;
           }
           if (drawer.hidden || event.key !== "Tab") return;
