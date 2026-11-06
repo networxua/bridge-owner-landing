@@ -35,12 +35,15 @@ python3 -m http.server 4173
 
 Статичний корінь, без Actions і без секретів. Файл `.nojekyll` уже в корені.
 
-Якщо API не вмикає Pages:
+GitHub API відповів `403 Resource not accessible by integration` — токен не може вмикати Pages. Секрети не потрібні. Увімкнути вручну:
 
-1. Settings → Pages → Deploy from a branch.
-2. Branch з цією сторінкою (після злиття — `main`), folder `/ (root)`.
-3. Save. Адреса: `https://networxua.github.io/bridge-owner-landing/`.
-4. Посилання в коді відносні (`listings/`), щоб працювали і локально, і на адресі репозиторія.
+1. Відкрити https://github.com/networxua/bridge-owner-landing/settings/pages
+2. Build and deployment → Source: **Deploy from a branch**.
+3. Branch: `cursor/bridge-owner-v1-3cea` (після злиття в `main` перемкнути джерело на `main`).
+4. Folder: `/ (root)`.
+5. Save. За хвилину сайт буде на https://networxua.github.io/bridge-owner-landing/
+
+Окремий workflow не додавати. Посилання в коді відносні (`listings/`), щоб працювали і локально, і на адресі репозиторія.
 
 ## Що потрібно для публічного каталогу
 
