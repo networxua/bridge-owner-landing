@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0f1310">
+    <title>Bridge — план продажу для власників</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip" href="#content">До змісту</a>
+    <main id="content">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-media">
+          <img
+            src="bridge-owner-plan-concept.jpg"
+            width="1280"
+            height="720"
+            alt="Концептуальний натюрморт на темному столі: аркуш із кресленням, ручка, лінійка та макет. Не об’єкт і не звіт Bridge."
+            decoding="async">
+        </div>
+
+        <header class="top">
+          <a class="brand" href="#content">
+            <span class="wordmark">BRIDGE</span>
+            <span class="slash" aria-hidden="true">/</span>
+            <span class="brand-role">агентство нерухомості</span>
+          </a>
+          <nav class="desk-nav" aria-label="Для власників">
+            <a href="#plan">Для власників</a>
+            <a class="ghost" href="tel:+380635933019">Зателефонувати</a>
+          </nav>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="owner-menu">
+            Меню
+          </button>
+        </header>
+
+        <div class="hero-copy">
+          <p class="kicker">BRIDGE · КИЇВ · ДЛЯ ВЛАСНИКІВ</p>
+          <h1 id="hero-title">
+            <span class="line wide">Не просто оцінка.</span>
+            <span class="line narrow">Не просто</span>
+            <span class="line narrow">оцінка.</span>
+            <span class="line">План продажу.</span>
+          </h1>
+          <p class="lede">Оцінимо вашу нерухомість і письмово розпишемо кроки: підготовка, реклама, покази та робота з покупцями.</p>
+          <div class="actions">
+            <div class="offer-block">
+              <button type="button" class="orbit" id="open-contact" aria-expanded="false" aria-controls="contact-step">
+                <span class="orbit-spin" aria-hidden="true"></span>
+                <span class="orbit-label">Отримати безкоштовний план продажу</span>
+              </button>
+              <p class="offer-note">Оцінка і план — безкоштовно</p>
+            </div>
+            <button type="button" class="text-open" data-open-contact>Обговорити квартиру</button>
+            <a class="down" href="#plan">Що входить у план ↓</a>
+          </div>
+          <div id="contact-step" class="contact-panel" hidden>
+            <p class="contact-title">Почнемо з вашої квартири</p>
+            <p>Розкажіть про неї агенту — ми обговоримо оцінку і план продажу.</p>
+            <div class="choices">
+              <a href="tel:+380635933019">Зателефонувати · +38 (063) 593 30 19</a>
+              <a href="https://www.instagram.com/bridge__realty/" target="_blank" rel="noopener">Написати в Instagram · @bridge__realty<span class="sr">, відкриється в новій вкладці</span></a>
+            </div>
+          </div>
+          <p class="quiet">
+            <a href="tel:+380635933019">+38 (063) 593 30 19</a>
+            <a href="https://www.instagram.com/bridge__realty/" rel="noopener noreferrer">Написати @bridge__realty</a>
+          </p>
+        </div>
+
+        <p class="art-note">Художній концепт · не об’єкт Bridge</p>
+        <a class="nudge" href="#plan">
+          <span class="nudge-line" aria-hidden="true"></span>
+          далі
+        </a>
+      </section>
+
+      <section class="opening" id="plan" aria-labelledby="plan-title">
+        <h2 id="plan-title">Не починаємо з оголошення.<br>Починаємо з вашої квартири.</h2>
+        <ol class="steps">
+          <li><span>01</span>Підготовка</li>
+          <li><span>02</span>Реклама</li>
+          <li><span>03</span>Покази</li>
+          <li><span>04</span>Робота з покупцями</li>
+        </ol>
+        <p class="concept">Концепт сторінки для Bridge · план продажу — майбутній документ агентства</p>
+      </section>
+    </main>
+
+    <div id="owner-menu" class="drawer" hidden>
+      <div class="drawer-bar">
+        <span class="wordmark">BRIDGE</span>
+        <button type="button" data-close>Закрити</button>
+      </div>
+        <nav aria-label="Меню власника">
+        <a href="#plan">Для власників</a>
+        <button type="button" data-open-contact>Отримати безкоштовний план продажу</button>
+        <a href="tel:+380635933019">Зателефонувати</a>
+        <a class="fine" href="tel:+380635933019">+38 (063) 593 30 19</a>
+        <a class="fine" href="https://www.instagram.com/bridge__realty/" rel="noopener noreferrer">Написати @bridge__realty</a>
+      </nav>
+      <p class="concept">Концепт сторінки для Bridge · план продажу — майбутній документ агентства</p>
+    </div>
+
+    <script>
+      (function () {
+        var btn = document.querySelector(".menu-toggle");
+        var drawer = document.getElementById("owner-menu");
+        if (!btn || !drawer) return;
+        var closeBtn = drawer.querySelector("[data-close]");
+
+        function nodes() {
+          return drawer.querySelectorAll("a, button");
+        }
+
+        function openMenu() {
+          drawer.hidden = false;
+          btn.setAttribute("aria-expanded", "true");
+          document.body.classList.add("menu-open");
+          closeBtn.focus();
+        }
+
+        function closeMenu() {
+          if (drawer.hidden) return;
+          drawer.hidden = true;
+          btn.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("menu-open");
+          btn.focus();
+        }
+
+        btn.addEventListener("click", function () {
+          if (drawer.hidden) openMenu();
+          else closeMenu();
+        });
+
+        closeBtn.addEventListener("click", closeMenu);
+
+        drawer.addEventListener("click", function (event) {
+          if (event.target.closest("a")) closeMenu();
+        });
+
+        var panel = document.getElementById("contact-step");
+        var opener = document.getElementById("open-contact");
+
+        function setOpen(next) {
+          if (!panel || !opener) return;
+          panel.hidden = !next;
+          opener.setAttribute("aria-expanded", next ? "true" : "false");
+          document.querySelectorAll("[data-open-contact]").forEach(function (el) {
+            el.setAttribute("aria-expanded", next ? "true" : "false");
+          });
+        }
+
+        function openContact(focusInside) {
+          setOpen(true);
+          var target = focusInside ? panel.querySelector("a") : opener;
+          if (panel) panel.scrollIntoView({ block: "nearest", inline: "nearest" });
+          if (target) target.focus();
+        }
+
+        function closeContact() {
+          if (!panel || panel.hidden) return;
+          setOpen(false);
+          if (opener) opener.focus();
+        }
+
+        if (opener) {
+          opener.addEventListener("click", function () {
+            if (panel.hidden) openContact(false);
+            else closeContact();
+          });
+        }
+
+        document.querySelectorAll("[data-open-contact]").forEach(function (el) {
+          el.addEventListener("click", function () {
+            if (!drawer.hidden) closeMenu();
+            openContact(true);
+          });
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            if (!drawer.hidden) closeMenu();
+            else closeContact();
+            return;
+          }
+          if (drawer.hidden || event.key !== "Tab") return;
+          var list = nodes();
+          if (!list.length) return;
+          var first = list[0];
+          var last = list[list.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
